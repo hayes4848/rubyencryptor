@@ -28,6 +28,7 @@ class Encryptor
 
 	def cipher(rotation)
   		characters = (' '..'z').to_a
+  		characters << "\n"
   		rotated_characters = characters.rotate(rotation)
   		Hash[characters.zip(rotated_characters)]
 	end
@@ -49,6 +50,23 @@ class Encryptor
     # Close the file
     new_name.close
 		
+	end
+
+	def decrypt_file(filename, rotation)
+		# Create the file handle to the input file
+    input = File.open(filename, "r")
+    # Read the text of the input file
+    text = input.read
+    # Encrypt the text
+    encrypted_text = encrypt(text,rotation)
+    # Create a name for the output file
+    new_name = filename + '.clear'
+    # Create an output file handle
+    new_name = File.open(new_name, "w")
+    # Write out the text
+    new_name.write(encrypted_text)
+    # Close the file
+    new_name.close
 	end
 
 	# def crack(string)
