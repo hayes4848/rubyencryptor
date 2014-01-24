@@ -60,7 +60,7 @@ class Encryptor
     # Encrypt the text
     encrypted_text = encrypt(text,rotation)
     # Create a name for the output file
-    new_name = filename + '.clear'
+    new_name = filename.gsub('encrypted', 'decrypted')
     # Create an output file handle
     new_name = File.open(new_name, "w")
     # Write out the text
